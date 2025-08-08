@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менторская программа | Школа №57</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c5aa0; /* Основной синий школы */
+            --secondary: #1a3d6d; /* Темно-синий */
+            --accent: #ffc107; /* Акцентный золотой */
+            --light: #f8f9fc;
+            --dark: #212529;
+            --school-color: #2c5aa0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fc 0%, #e9ecef 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            background-attachment: fixed;
+        }
+        
+        /* Шапка с логотипом 57 */
+        .school-header {
+            background: linear-gradient(135deg, var(--school-color) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .school-header::before {
+            content: "57";
+            position: absolute;
+            font-size: 320px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .school-logo {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 15px;
+        }
+        
+        .school-logo .number {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .school-logo .text {
+            font-size: 1.8rem;
+            margin-top: 5px;
+            letter-spacing: 3px;
+        }
+        
+        .school-header h1 {
+            font-size: 2.2rem;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .school-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        /* Контент */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--secondary);
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+        }
+        
+        /* Блок о программе */
+        .about-program {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+        
+        .program-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .program-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .program-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .program-card .icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Менторы */
+        .mentors {
+            position: relative;
+        }
+        
+        .mentor-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mentor-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .mentor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .mentor-image {
+            height: 200px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--school-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mentor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .mentor-card:hover .mentor-image img {
+            transform: scale(1.05);
+        }
+        
+        .mentor-info {
+            padding: 25px;
+        }
+        
+        .mentor-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .mentor-school {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .mentor-achievements {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .mentor-skills {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+        
+        .btn-mentor {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            background: var(--accent);
+            color: #212529;
+            font-weight: 600;
+        }
+        
+        .btn-mentor:hover {
+            background: #e0aa00;
+        }
+        
+        /* Блок "Стать ментором" */
+        .become-mentor {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .become-mentor::before {
+            content: "57";
+            position: absolute;
+            font-size: 300px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            font-family: 'Times New Roman', serif;
+            color: var(--accent);
+        }
+        
+        .mentor-benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 25px;
+            width: 280px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .benefit-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        /* Подвал с логотипом 57 */
+        .school-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .school-footer::before {
+            content: "57";
+            position: absolute;
+            font-size: 300px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            font-family: 'Times New Roman', serif;
+            color: var(--accent);
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .school-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .become-mentor {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .school-logo .number {
+                font-size: 4rem;
+            }
+            
+            .school-logo .text {
+                font-size: 1.5rem;
+            }
+            
+            .program-points,
+            .mentor-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-program {
+                padding: 30px 20px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с логотипом 57 -->
+    <header class="school-header">
+        <div class="container">
+            <div class="school-logo">
+                <div class="number">57</div>
+                <div class="text">ШКОЛА</div>
+            </div>
+            <h1>Менторская программа</h1>
+            <p>Выпускники помогают ученикам достигать академических высот</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- О программе -->
+        <section class="about-section">
+            <h2 class="section-title">О нашей программе</h2>
+            
+            <div class="about-program">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">
+                    Программа менторства школы №57 создана для связи успешных выпускников с нынешними учениками. 
+                    Наша миссия - передача знаний, опыта и вдохновения для достижения академических успехов.
+                </p>
+                
+                <div class="program-points">
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Подготовка к олимпиадам</h3>
+                        <p>Персональная помощь в подготовке к ВсОШ и перечневым олимпиадам от призеров и победителей</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Научные проекты</h3>
+                        <p>Консультации по исследовательским работам и проектам для конференций и конкурсов</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3>Профориентация</h3>
+                        <p>Помощь в выборе вуза и специальности от студентов ведущих университетов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Менторы -->
+        <section class="mentors">
+            <h2 class="section-title">Наши менторы</h2>
+            
+            <div class="mentor-gallery">
+                <!-- Ментор 1 -->
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Алексей Петров">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускник 2022 года</span>
+                        <h3>Алексей Петров</h3>
+                        <span class="mentor-achievements">МФТИ, 2 курс | Призер ВсОШ по физике</span>
+                        <p>Помогу с подготовкой к олимпиадам по физике и математике</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Физика</span>
+                            <span class="skill-tag">Олимпиады</span>
+                            <span class="skill-tag">МФТИ</span>
+                        </div>
+                        <a href="https://forms.gle/ВАШ_ИД_ФОРМЫ" class="btn btn-mentor">Запросить помощь</a>
+                    </div>
+                </div>
+
+                <!-- Ментор 2 -->
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Мария Сидорова">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускница 2021 года</span>
+                        <h3>Мария Сидорова</h3>
+                        <span class="mentor-achievements">МГУ, 3 курс | Стажировка в Сколково</span>
+                        <p>Помогу с исследовательскими проектами и выбором вуза</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Биология</span>
+                            <span class="skill-tag">Исследования</span>
+                            <span class="skill-tag">МГУ</span>
+                        </div>
+                        <a href="https://forms.gle/ВАШ_ИД_ФОРМЫ" class="btn btn-mentor">Запросить помощь</a>
+                    </div>
+                </div>
+
+                <!-- Ментор 3 -->
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Дмитрий Иванов">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускник 2020 года</span>
+                        <h3>Дмитрий Иванов</h3>
+                        <span class="mentor-achievements">ВШЭ, 2 курс | Победитель Hackathon</span>
+                        <p>Помогу с программированием и подготовкой к ЕГЭ по информатике</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Программирование</span>
+                            <span class="skill-tag">Web-разработка</span>
+                            <span class="skill-tag">ВШЭ</span>
+                        </div>
+                        <a href="https://forms.gle/ВАШ_ИД_ФОРМЫ" class="btn btn-mentor">Запросить помощь</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок "Стать ментором" -->
+        <section class="become-mentor-section">
+            <div class="become-mentor">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Стать частью программы</h2>
+                <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px;">
+                    Выпускник школы №57? Присоединяйтесь к сообществу менторов и помогите следующему поколению учеников достичь успеха!
+                </p>
+                
+                <div class="mentor-benefits">
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Расширьте сеть контактов</h3>
+                        <p>Знакомство с талантливыми учениками и другими выпускниками</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Развивайте навыки</h3>
+                        <p>Улучшайте коммуникативные и менторские способности</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-heart"></i></div>
+                        <h3>Верните долг школе</h3>
+                        <p>Помогите родной школе как когда-то помогли вам</p>
+                    </div>
+                </div>
+                
+                <a href="https://forms.gle/ВАШ_ИД_ФОРМЫ_ДЛЯ_МЕНТОРОВ" class="btn" style="background: var(--accent); color: #212529; font-size: 1.2rem; padding: 16px 40px;">
+                    <i class="fas fa-user-plus"></i> Стать ментором
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Подвал с логотипом 57 -->
+    <footer class="school-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="school-logo" style="margin-bottom: 30px;">
+                    <div class="number" style="color: var(--accent);">57</div>
+                    <div class="text">Менторская программа</div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fab fa-telegram"></i></span>
+                        <span>Telegram: <a href="https://t.me/mentors_sch57" style="color: var(--accent);">@mentors_sch57</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                        <span>Email: <a href="mailto:mentors@sch57.ru" style="color: var(--accent);">mentors@sch57.ru</a></span>
+                    </div>
+                </div>
+                
+                <p class="copyright">© 2024 Менторская программа школы №57. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
